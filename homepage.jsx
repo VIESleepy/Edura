@@ -27,211 +27,152 @@ export default function App() {
     <div
       className="min-h-screen p-8 font-gotham relative"
       style={{
-        background: "linear-gradient(to bottom right, #F2E6EE, #977DFF)",
+        fontFamily: "'Gotham', 'Helvetica Neue', Arial, sans-serif",
+        background: "linear-gradient(135deg, #F3EDF9, #8C7CFF)",
       }}
     >
-      {/* INNER CONTAINER */}
-      <div className="min-h-screen p-10 bg-transparent max-w-7xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-12 tracking-tight">
+      <div className="min-h-screen p-10 max-w-7xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-12 tracking-tight leading-tight">
           Standardized Test Teaching Platform
         </h1>
 
         {/* Tabs */}
         <Tabs defaultValue="teacher" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-white/30 backdrop-blur-md rounded-xl p-1 shadow-inner">
+          <TabsList className="grid w-full grid-cols-2 bg-white/40 backdrop-blur-lg rounded-2xl p-1 shadow-inner">
             <TabsTrigger
               value="teacher"
-              className="data-[state=active]:bg-white/80 data-[state=active]:shadow-md rounded-lg"
+              className="text-gray-700 data-[state=active]:bg-white data-[state=active]:shadow-lg rounded-lg transition"
             >
               Teacher
             </TabsTrigger>
             <TabsTrigger
               value="student"
-              className="data-[state=active]:bg-white/80 data-[state=active]:shadow-md rounded-lg"
+              className="text-gray-700 data-[state=active]:bg-white data-[state=active]:shadow-lg rounded-lg transition"
             >
               Student
             </TabsTrigger>
           </TabsList>
 
-          {/* ---------------------- TEACHER INTERFACE ---------------------- */}
+          {/* Teacher Interface */}
           <TabsContent value="teacher">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-              {/* Lesson & Test Builder */}
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <BookOpen className="text-blue-600" />
-                    <h2 className="text-2xl font-semibold">
-                      Test Builder
-                    </h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Create full-length tests with AI support.
-                    Build mini quizzes or skill-focused drills easily.
-                  </p>
-                  <Button className="mt-6" aria-label="Create a Test">
-                    Create a Test
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Customization & Filtering */}
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Book className="text-green-600" />
-                    <h2 className="text-2xl font-semibold">
-                      Lesson Builder
-                    </h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Design lessons with AI support.
-                  </p>
-                  <Button className="mt-6" aria-label="Set Filters">
-                    Design your Lesson
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Assignment & Class Management */}
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <ClipboardList className="text-purple-600" />
-                    <h2 className="text-2xl font-semibold">
-                      Assignment & Class Management
-                    </h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Assign exercises to students, track progress, and auto-grade
-                    tests with detailed dashboards.
-                  </p>
-                  <Button className="mt-6" aria-label="Manage Class">
-                    Manage Class
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Content Bank & Freemium */}
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <FolderOpen className="text-orange-600" />
-                    <h2 className="text-2xl font-semibold">
-                      Content Bank & Freemium
-                    </h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Browse available materials, unlock premium content, or
-                    contribute your own resources.
-                  </p>
-                  <Button className="mt-6" aria-label="Browse Materials">
-                    Browse Materials
-                  </Button>
-                </CardContent>
-              </Card>
+              {[
+                {
+                  icon: <BookOpen className="text-blue-600" />,
+                  title: "Test Builder",
+                  desc: "Create full-length tests or mini quizzes with AI assistance.",
+                  button: "Create a Test",
+                },
+                {
+                  icon: <Book className="text-green-600" />,
+                  title: "Lesson Builder",
+                  desc: "Design lessons tailored to your students with AI support.",
+                  button: "Design your Lesson",
+                },
+                {
+                  icon: <ClipboardList className="text-purple-600" />,
+                  title: "Assignment & Class Management",
+                  desc: "Assign exercises, track progress, and auto-grade with ease.",
+                  button: "Manage Class",
+                },
+                {
+                  icon: <FolderOpen className="text-orange-600" />,
+                  title: "Content Bank & Freemium",
+                  desc: "Browse materials, unlock premium content, or contribute resources.",
+                  button: "Browse Materials",
+                },
+              ].map(({ icon, title, desc, button }, idx) => (
+                <Card
+                  key={idx}
+                  className="shadow-lg rounded-2xl hover:shadow-2xl transition-shadow bg-white/80 backdrop-blur-sm"
+                >
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      {icon}
+                      <h2 className="text-2xl font-semibold">{title}</h2>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">{desc}</p>
+                    <Button className="mt-6 px-6 py-2" aria-label={button}>
+                      {button}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </TabsContent>
 
-          {/* ---------------------- STUDENT INTERFACE ---------------------- */}
+          {/* Student Interface */}
           <TabsContent value="student">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-              {/* Assignments */}
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <ClipboardList className="text-purple-600" />
-                    <h2 className="text-2xl font-semibold">Assignments</h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    View and complete assigned tests or quizzes. Get instant
-                    feedback after submission.
-                  </p>
-                  <Button className="mt-6" aria-label="View Assignments">
-                    View Assignments
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Practice & Study */}
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <BookOpen className="text-blue-600" />
-                    <h2 className="text-2xl font-semibold">Practice & Study</h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Access practice questions by skill, difficulty, or topic.
-                    Track improvement over time.
-                  </p>
-                  <Button className="mt-6" aria-label="Start Practice">
-                    Start Practicing
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Content Bank */}
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <FolderOpen className="text-orange-600" />
-                    <h2 className="text-2xl font-semibold">Content Bank & Freemium</h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Browse available materials, unlock premium content, or
-                    contribute your own resources.
-                  </p>
-                  <Button className="mt-6" aria-label="Browse Content">
-                    Browse Materials
-                  </Button>
-                </CardContent>
-              </Card>
-              <Card className="shadow-xl rounded-2xl hover:shadow-2xl transition-shadow bg-white/80">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Flame className="text-orange-600" />
-                    <h2 className="text-2xl font-semibold">Dashboard</h2>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    See your progress, summary, and personal recommendations.
-                  </p>
-                  <Button className="mt-6" aria-label="Browse Content">
-                    Open Dashboard
-                  </Button>
-                </CardContent>
-              </Card>
+              {[
+                {
+                  icon: <ClipboardList className="text-purple-600" />,
+                  title: "Assignments",
+                  desc: "View and complete assigned tests or quizzes with instant feedback.",
+                  button: "View Assignments",
+                },
+                {
+                  icon: <BookOpen className="text-blue-600" />,
+                  title: "Practice & Study",
+                  desc: "Access practice questions by skill, difficulty, or topic.",
+                  button: "Start Practicing",
+                },
+                {
+                  icon: <FolderOpen className="text-orange-600" />,
+                  title: "Content Bank & Freemium",
+                  desc: "Browse available materials or contribute your own.",
+                  button: "Browse Materials",
+                },
+                {
+                  icon: <Flame className="text-orange-600" />,
+                  title: "Dashboard",
+                  desc: "Track progress, view summaries, and get personal recommendations.",
+                  button: "Open Dashboard",
+                },
+              ].map(({ icon, title, desc, button }, idx) => (
+                <Card
+                  key={idx}
+                  className="shadow-lg rounded-2xl hover:shadow-2xl transition-shadow bg-white/80 backdrop-blur-sm"
+                >
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      {icon}
+                      <h2 className="text-2xl font-semibold">{title}</h2>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">{desc}</p>
+                    <Button className="mt-6 px-6 py-2" aria-label={button}>
+                      {button}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </TabsContent>
         </Tabs>
       </div>
 
-      {/* ---------------------- FLOATING CHAT BUBBLE ---------------------- */}
+      {/* Floating Chat Bubble */}
       <div className="fixed bottom-6 right-6">
-        {/* Bubble button */}
         <button
           onClick={() => setChatOpen(!chatOpen)}
-          className="bg-pink-600 text-white p-4 rounded-full shadow-xl hover:bg-pink-700 transition"
+          className="bg-pink-600 text-white p-4 rounded-full shadow-lg hover:bg-pink-700 transition"
         >
           <MessageCircle size={28} />
         </button>
 
-        {/* Chat window */}
         {chatOpen && (
           <div className="absolute bottom-16 right-0 w-80 bg-white rounded-xl shadow-2xl overflow-hidden">
-            {/* Header */}
             <div className="flex justify-between items-center bg-pink-600 text-white px-4 py-2">
               <h3 className="font-semibold">AI Chatbot Support</h3>
               <button onClick={() => setChatOpen(false)}>
                 <X size={20} />
               </button>
             </div>
-
-            {/* Messages area */}
             <div className="p-4 h-64 overflow-y-auto text-gray-700">
-              <p className="text-sm text-gray-500">👋 Hi! How can I help you today?</p>
+              <p className="text-sm text-gray-500">
+                👋 Hi! How can I help you today?
+              </p>
             </div>
-
-            {/* Input area */}
             <div className="flex items-center border-t p-2">
               <input
                 type="text"
